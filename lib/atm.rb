@@ -45,9 +45,39 @@ private
     @funds < amount
   end
 
+
   def perform_transaction(amount, account)
-    @funds -= amount
-    account.balance = account.balance - amount
-    { status: true, message: 'success', date: Date.today, amount: amount}
+  @funds -= amount
+  account.balance = account.balance - amount
+  { status: true, message: 'success', date: Date.today, amount: amount, bills: add_bills(amount) }
+end
+
+def add_bills(amount)
+  denominations = [20, 10, 5]
+  bills = []
+  denominations.each do |bill|
+    while amount - bill >= 0
+      amount -= bill
+      bills << bill
+    end
   end
+  bills
+end
+  # def perform_transaction(amount, account)
+  #   @funds -= amount
+  #   account.balance = account.balance - amount
+  #   { status: true, message: 'success', date: Date.today, amount: amount, bills: add_bills(amount) }
+  # end
+  #
+  # def add_bills(amount)
+  #   denominations = [20, 10 , 5]
+  #   bills = []
+  #   denominations.each do |bill|
+  #     while amount - bill >= 0
+  #       amount -= bill
+  #       bills << bills
+  #     end
+  #   end
+  #   bills
+  # end
 end
