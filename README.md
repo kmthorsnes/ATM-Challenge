@@ -34,7 +34,6 @@ $ load './lib/atm-demo.rb'
 
 $ load './lib/person.rb'
 => true
-
 ```
 Create a person
 ```
@@ -84,3 +83,7 @@ $ person.balance
 ## Acknowledgments
 
 * In addition to the course material Davids and Aidens work: https://github.com/AKidd95/ATM_demo was used as reference for setting up this project.
+
+## Badges
+<a href='https://coveralls.io/github/kmthorsnes/atm2?branch=master'><img src='https://coveralls.io/repos/github/kmthorsnes/atm2/badge.svg?branch=master' alt='Coverage Status' /></a>
+
