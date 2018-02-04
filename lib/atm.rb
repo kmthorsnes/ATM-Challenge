@@ -4,27 +4,27 @@ class Atm
   attr_accessor :funds
 
   def initialize
-      @funds = 1000
+    @funds = 1000
   end
 
   def withdraw(amount, pin_code, account)
-    case
-    when insufficient_funds_in_account?(amount, account)
+    if insufficient_funds_in_account?(amount, account)
       { status: false, message: 'insufficient funds in account', date: Date.today }
-    when insufficient_funds_in_atm?(amount)
+    elsif insufficient_funds_in_atm?(amount)
       { status: false, message: 'insufficient funds in ATM', date: Date.today }
-    when incorrect_pin?(pin_code, account.pin_code)
+    elsif incorrect_pin?(pin_code, account.pin_code)
       { status: false, message: 'wrong pin', date: Date.today }
-    when card_expired?(account.exp_date)
+    elsif card_expired?(account.exp_date)
       { status: false, message: 'card expired', date: Date.today }
-    when account_status?(account.account_status)
+    elsif account_status?(account.account_status)
       { status: false, message: 'account not active', date: Date.today }
     else
       perform_transaction(amount, account)
     end
   end
 
-private
+  private
+
   def account_status?(account_status)
     account_status != :active
   end
@@ -45,39 +45,21 @@ private
     @funds < amount
   end
 
-
   def perform_transaction(amount, account)
-  @funds -= amount
-  account.balance = account.balance - amount
-  { status: true, message: 'success', date: Date.today, amount: amount, bills: add_bills(amount) }
+    @funds -= amount
+    account.balance = account.balance - amount
+    { status: true, message: 'success', date: Date.today, amount: amount, bills: add_bills(amount) }
 end
 
-def add_bills(amount)
-  denominations = [20, 10, 5]
-  bills = []
-  denominations.each do |bill|
-    while amount - bill >= 0
-      amount -= bill
-      bills << bill
+  def add_bills(amount)
+    denominations = [20, 10, 5]
+    bills = []
+    denominations.each do |bill|
+      while amount - bill >= 0
+        amount -= bill
+        bills << bill
+      end
     end
+    bills
   end
-  bills
-end
-  # def perform_transaction(amount, account)
-  #   @funds -= amount
-  #   account.balance = account.balance - amount
-  #   { status: true, message: 'success', date: Date.today, amount: amount, bills: add_bills(amount) }
-  # end
-  #
-  # def add_bills(amount)
-  #   denominations = [20, 10 , 5]
-  #   bills = []
-  #   denominations.each do |bill|
-  #     while amount - bill >= 0
-  #       amount -= bill
-  #       bills << bills
-  #     end
-  #   end
-  #   bills
-  # end
 end
