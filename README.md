@@ -87,5 +87,4 @@ $ person.balance
 ## Badges
 <a href='https://coveralls.io/github/kmthorsnes/atm2?branch=master'><img src='https://coveralls.io/repos/github/kmthorsnes/atm2/badge.svg?branch=master' alt='Coverage Status' /></a>
 
-{<img src="https://travis-ci.org/kmthorsnes/atm2.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/kmthorsnes/atm2]
-
+<img src="https://travis-ci.org/kmthorsnes/atm2.svg?branch=master" alt="Build Status" />
